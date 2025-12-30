@@ -1,6 +1,4 @@
-# TB Diagnostics AI Tools - FINAL PRODUCTION VERSION
-# All bugs fixed + optimizations + complete feature set
-# Version: 6.0.0-FINAL
+
 
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from pydantic import BaseModel, Field, ConfigDict
@@ -22,9 +20,9 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-# ============================================================================
+
 # ENHANCED PDF TABLE EXTRACTOR WITH OCR SUPPORT
-# ============================================================================
+
 
 class EnhancedPDFTableExtractor:
     """
@@ -546,9 +544,9 @@ class EnhancedPDFTableExtractor:
         
         return " | ".join(messages)
 
-# ============================================================================
+
 # PYDANTIC MODELS
-# ============================================================================
+
 
 class QueryRequest(BaseModel):
     model_config = ConfigDict(arbitrary_types_allowed=True)
@@ -561,9 +559,9 @@ class AgentResponse(BaseModel):
     tools_used: List[str]
     error: Optional[str] = None
 
-# ============================================================================
+
 # DATA INGESTION TOOL - WITH CACHING AND JSON FIXES
-# ============================================================================
+
 
 class DataIngestionTool:
     def __init__(self):
@@ -1113,9 +1111,9 @@ class DataIngestionTool:
                 chunks.append(chunk)
         return chunks
 
-# ============================================================================
+
 # RAG EVALUATION TOOL
-# ============================================================================
+
 
 class RAGEvaluationTool:
     def __init__(self, llm):
@@ -1417,17 +1415,15 @@ Respond ONLY with a number."""
         
         return agg
 
-# ============================================================================
+
 # GLOBAL INSTANCES
-# ============================================================================
+
 
 ingestion_tool_instance = DataIngestionTool()
 llm_instance = None
 eval_tool_instance = None
 
-# ============================================================================
 # LANGCHAIN TOOLS (OPTIMIZED)
-# ============================================================================
 
 def _process_single_file(filename: str, summary_only: bool = False) -> str:
     """
@@ -1633,9 +1629,9 @@ def evaluate_rag_output(query_set_json: str, retrieved_evidence_json: str,
     except Exception as e:
         return json.dumps({"error": str(e)})
 
-# ============================================================================
+
 # FASTAPI APP
-# ============================================================================
+
 
 app = FastAPI(
     title="TB Diagnostics AI Tools - FINAL PRODUCTION",
@@ -1655,16 +1651,9 @@ async def startup():
     tools = [process_tb_data_file, evaluate_rag_output]
     agent_executor = create_react_agent(llm_instance, tools)
     
-    print("\n" + "="*70)
+    
     print("  TB DIAGNOSTICS AI TOOLS - FINAL PRODUCTION")
-    print("="*70)
-    print("\n✅ All bugs fixed")
-    print("✅ JSON serialization safe")
-    print("✅ Processing cache enabled")
-    print("✅ Token optimized")
-    print("✅ OCR support")
-    print("✅ Duplicate columns handled")
-    print("\n" + "="*70 + "\n")
+   
 
 @app.get("/")
 async def root():
@@ -2050,7 +2039,6 @@ async def health():
 
 if __name__ == "__main__":
     import uvicorn
-    print("\n🚀 Starting TB Diagnostics AI Tools - FINAL PRODUCTION")
-    print("📊 All fixes applied and optimizations enabled")
-    print("🎯 Ready for production use!\n")
+    print("\n Starting TB Diagnostics AI Tools - FINAL PRODUCTION")
+    
     uvicorn.run(app, host="0.0.0.0", port=8010)

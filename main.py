@@ -342,7 +342,7 @@ with st.sidebar:
     """)
 
 # Main content
-tab1, tab2, tab3 = st.tabs(["📥 Upload & Process", "📊 Results Dashboard", "📖 Documentation"])
+tab1, tab2 = st.tabs(["📥 Upload & Process", "📊 Results Dashboard"])
 
 # ==================== TAB 1: UPLOAD & PROCESS ====================
 with tab1:
@@ -812,149 +812,7 @@ with tab2:
     else:
         st.info("👈 Process files in the **Upload & Process** tab first to see results here")
 
-# ==================== TAB 3: DOCUMENTATION ====================
-with tab3:
-    st.header("📖 Documentation")
-    
-    st.markdown("""
-    ## Overview
-    
-    The **Universal Data Ingestion & Preparation Tool** uses a hybrid AI approach to automatically:
-    - Parse multiple file formats (CSV, Excel, JSON, PDF, Text)
-    - Match data to predefined schemas
-    - Clean and standardize data
-    - Generate database-ready outputs
-    - Extract chunks for RAG systems
-    
-    ## Features
-    
-    ### 🎯 Hybrid Matching Approach
-    
-    The tool uses a **3-stage matching pipeline**:
-    
-    1. **Rule-Based Matching** (Fast, 70-90% coverage)
-       - Exact name matching
-       - Fuzzy string matching (Levenshtein distance)
-       - Domain-specific rules (TB/Healthcare patterns)
-    
-    2. **Semantic Matching** (Handles synonyms, 80-95% accuracy)
-       - Sentence transformer embeddings
-       - Cosine similarity with context
-       - Handles paraphrases and conceptual similarities
-    
-    3. **LLM Reasoning** (For ambiguous cases, 90-99% accuracy)
-       - Claude Sonnet 4 for complex reasoning
-       - Only called when confidence < 80%
-       - Explains decisions and suggests corrections
-    
-    ### 📦 5 Complete Outputs
-    
-    1. **Cleaned Structured Dataset** - Database-ready CSV files
-    2. **Schema File (JSON)** - Field mappings with confidence scores
-    3. **Issues Log (JSON)** - All data quality problems detected
-    4. **RAG Chunks (JSON)** - Text/table chunks for vector databases
-    5. **Metadata (JSON)** - Complete processing information
-    
-    ## How It Works
-    
-    ```
-    Upload Files
-         ↓
-    Parse & Extract (handles merged cells, PDFs, etc.)
-         ↓
-    Profile Data (statistics, patterns, quality)
-         ↓
-    Match to Schema (rule → semantic → LLM)
-         ↓
-    Clean & Transform (dates, types, standardization)
-         ↓
-    Generate Outputs (5 complete outputs)
-    ```
-    
-    ## Data Quality Checks
-    
-    The tool automatically detects:
-    - ✅ Future dates in temporal fields
-    - ✅ Mixed data types in columns
-    - ✅ Invalid values (unparseable dates, non-numeric in numeric fields)
-    - ✅ Missing required fields
-    - ✅ Type mismatches between data and schema
-    - ✅ High null percentages
-    
-    ## Best Practices
-    
-    1. **Schema Definitions**: Define comprehensive schemas with:
-       - Field synonyms (e.g., "patient_id" → ["episode_id", "case_id"])
-       - Semantic tags (identifier, temporal, geographic, etc.)
-       - Validation patterns
-    
-    2. **File Preparation**: 
-       - Use consistent date formats
-       - Avoid excessive merged cells in Excel
-       - Ensure column headers are in first row
-    
-    3. **Confidence Thresholds**:
-       - 90%+ : High confidence, proceed automatically
-       - 75-90%: Medium confidence, review recommendations
-       - <75%: Low confidence, manual review needed
-    
-    ## API Usage
-    
-    ### Start API Server
-    ```bash
-    python app.py --mode api \\
-      --schemas dm_patients.json dm_regions.json \\
-      --host 0.0.0.0 --port 8000
-    ```
-    
-    ### Call Endpoints
-    ```python
-    import requests
-    
-    # Ingest files
-    response = requests.post(
-        "http://localhost:8000/ingest",
-        json={"file_paths": ["data1.xlsx", "data2.csv"]}
-    )
-    
-    result = response.json()
-    ```
-    
-    ## CLI Usage
-    
-    ```bash
-    python app.py --mode cli \\
-      --schemas dm_patients.json dm_regions.json dm_talukas.json \\
-      --files data1.xlsx data2.csv data3.pdf \\
-      --output ./outputs
-    ```
-    
-    ## Requirements
-    
-    ```
-    pandas>=2.1.4
-    openpyxl>=3.1.2
-    pdfplumber>=0.10.3
-    sentence-transformers>=2.2.2
-    fuzzywuzzy>=0.18.0
-    fastapi>=0.108.0
-    streamlit>=1.29.0
-    groq>=0.4.1  # Optional, for LLM fallback
-    ```
-    
-    ## Support
-    
-    For issues or questions:
-    - Review the Issues Log for data quality problems
-    - Check confidence scores in Schema Files
-    - Use LLM fallback for ambiguous cases
-    - Adjust thresholds in Advanced Settings
-    
-    ---
-    
-    **Version:** 1.0.0  
-    **Last Updated:** January 2025
-    """)
+
 
 # Footer
 st.divider()
